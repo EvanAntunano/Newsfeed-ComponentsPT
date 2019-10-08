@@ -85,30 +85,69 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Lord of the Rings',
+    date: 'Oct 8th, 2019',
+    firstParagraph: 'Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, Nine for Mortal Men, doomed to die, One for the Dark Lord on his dark throne In the Land of Mordor where the Shadows Lie. One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In the Land of Mordor where the Shadows Lie.',
+
+    secondParagraph: 'Home is behind, the world ahead, and there are many paths to treat through shadows to the edge of night, until the stars are all alright.',
+
+    thirdParagraph: 'To the sea, to the sea! The white gulls are crying, The wind is blowing, and the white foam is flying. West, west away, the round sun is falling, Grey ship, grey ship, do you hear them calling, The voices of my people that have gone before me? I will leave, I will leave the woods that bore me; For our days are ending and our years failing. I will pass the wide waters lonely sailing. Long are the waves on the Last Shore falling, Sweet are teh voices in teh Lost Isle calling, in Eressea, in Elvenhome that no man can discover, Where the leaves fall not: land of my people forever!'
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+
+const articleSelection = document.querySelector('.articles');
+
+data.forEach(item => {
+  articleSelection.appendChild(articleCreation(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph));
+});
+
+function articleCreation(title, date, para1, para2, para3){
+
+  //define the elements
+  const articleEl = document.createElement('div');
+  const titleMaker = document.createElement('h2');
+  const dateMaker = document.createElement('p');
+  const para1Maker = document.createElement('p');
+  const para2Maker = document.createElement('p');
+  const para3Maker = document.createElement('p');
+  const expandButtonMaker = document.createElement('span');
+
+
+  //Build out the structure
+  articleEl.appendChild(titleMaker);
+  articleEl.appendChild(dateMaker);
+  articleEl.appendChild(para1Maker);
+  articleEl.appendChild(para2Maker);
+  articleEl.appendChild(para3Maker);
+  articleEl.appendChild(expandButtonMaker);
+
+
+
+  //classes
+  articleEl.classList.add('article');
+  dateMaker.classList.add('date');
+  expandButtonMaker.classList.add('expandButton');
+
+
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  //text
+  titleMaker.textContent = title;
+  dateMaker.textContent = date;
+  para1Maker.textContent = para1;
+  para2Maker.textContent = para2;
+  para3Maker.textContent = para3;
+  expandButtonMaker.textContent = '\u2694';
 
-    {three separate paragraph elements}
 
-    <span class='expandButton'></span>
-  </div>
+  //event listener for expand button
+  expandButtonMaker.addEventListener('click', (e) => {
+    articleEl.classList.toggle('article-open');
+  });
 
-  Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  return articleEl
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
-  Step 3: return the entire component.
-
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
-*/
+}
