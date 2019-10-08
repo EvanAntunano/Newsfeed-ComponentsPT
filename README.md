@@ -12,6 +12,7 @@ In this project we are going to be building a news feed reader. The goal is to h
   * Basic DOM manipulation
   * Events and event listeners
 
+
 ## Set Up The Project With Git
 
 **Follow these steps to set up and work on your project:**
